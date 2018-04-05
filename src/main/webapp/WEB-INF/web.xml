@@ -53,6 +53,9 @@
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<session-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
 	<!-- shiro配置 结束 -->
 	
 	<!-- 添加日志监听器 -->
