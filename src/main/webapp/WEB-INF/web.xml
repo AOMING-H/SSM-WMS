@@ -32,7 +32,7 @@
 	<!--解决跨域访问 -->
 	<filter>
 		<filter-name>CORSFilter</filter-name>
-		<filter-class>utils.filter.CORSFilter</filter-class>
+		<filter-class>com.ssm.ming.security.filter.CORSFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CORSFilter</filter-name>
