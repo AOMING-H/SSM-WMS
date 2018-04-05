@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.ming.dao.MaterialBaseDao">
+	<resultMap id="BaseResultMap" type="com.ssm.ming.entity.MaterialBase">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="product_series_id" property="productSeriesId" jdbcType="INTEGER" />
+		<result column="material_no" property="materialNo" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="picture" property="picture" jdbcType="VARCHAR" />
+		<result column="category" property="category" jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="storage_life" property="storageLife" jdbcType="INTEGER" />
+		<result column="specifications" property="specifications" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="is_enable" property="isEnable" jdbcType="BOOLEAN" />
+		<result column="is_delete" property="isDelete" jdbcType="BOOLEAN" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="INTEGER" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, product_series_id, material_no, name, picture, category, unit, storage_life, specifications, description, is_enable, is_delete, create_time, create_user, update_time, update_user 
+	</sql>
+	<select id="findAll" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_material_base
+	</select>
+</mapper>

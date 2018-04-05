@@ -1,0 +1,20 @@
+.error-mess {
+    clear: both;
+    background: #fff0f0;
+    border: 1px solid #ffd2d2;
+    line-height: 26px;
+    margin-top: 10px;
+    color: #b74d46;
+    width: 100%;
+    padding: 0 5px;
+    word-break: break-all;
+}
+
+.error-mess .error-icon {
+    display: inline-block;
+    background: url(../images/login-logic-icons.png) no-repeat 0 0;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin: -4px 5px -2px 0px;
+}

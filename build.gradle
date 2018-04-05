@@ -1,0 +1,72 @@
+apply plugin: 'war'  
+
+sourceCompatibility = 1.8
+version = '1.0'
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springVersion = "5.0.3.RELEASE"
+    mybatisVersion = "3.4.5"
+    slf4jVersion = "1.7.25"
+    log4jVersion = "1.2.17"
+    mysqlVersion = "6.0.6"
+    shiroVersion = "1.2.3"
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-core', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-aop', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-aspects', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-tx', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-web', version: rootProject.ext.springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: rootProject.ext.springVersion
+
+	compile group: 'org.ehcache', name: 'ehcache', version: '3.4.0'
+	compile group: 'org.apache.shiro', name: 'shiro-core', version: rootProject.ext.shiroVersion
+	compile group: 'org.apache.shiro', name: 'shiro-web', version: rootProject.ext.shiroVersion
+	compile group: 'org.apache.shiro', name: 'shiro-ehcache', version: rootProject.ext.shiroVersion
+	compile group: 'org.apache.shiro', name: 'shiro-spring', version: rootProject.ext.shiroVersion
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: rootProject.ext.mysqlVersion
+    compile group: 'org.mybatis', name: 'mybatis', version: rootProject.ext.mybatisVersion
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.1'
+    
+    compile group: 'com.alibaba', name: 'druid', version: '1.1.8'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.46'
+    compile group: 'log4j', name: 'log4j', version: rootProject.ext.log4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-api', version: rootProject.ext.slf4jVersion
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    compile group: 'org.logback-extensions', name: 'logback-ext-spring', version: '0.1.4'
+    
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    compile group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.2-b01'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+	testCompile group: 'org.springframework', name: 'spring-test', version: rootProject.ext.springVersion
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+war{  
+    baseName ="WMS"  
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
