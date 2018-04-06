@@ -1,13 +1,14 @@
 package com.ssm.ming.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.ssm.ming.dao.MaterialBaseDao;
-import com.ssm.ming.entity.MaterialBase;
+import com.ssm.ming.domain.MaterialBase;
 import com.ssm.ming.service.MaterialBaseService;
+import com.ssm.ming.util.BeanUtil;
+import com.ssm.ming.util.PagedResult;
 
 /**
  * @author Wenming.Huang
@@ -17,11 +18,15 @@ import com.ssm.ming.service.MaterialBaseService;
 @Service("materialBaseService")
 public class MaterialBaseServiceImpl implements MaterialBaseService{
     @Autowired
-    public MaterialBaseDao materialBaseDao;
+    private MaterialBaseDao materialBaseDao;
 
     @Override
-    public List<MaterialBase>  findAll() {
-        return materialBaseDao.findAll();
+    public PagedResult<MaterialBase>  findAllMaterialBaseInfo(Integer pageNo,Integer pageSize) {
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 10 : pageSize;
+        // startPage是告诉拦截器说我要开始分页了。分页参数是这两个
+        PageHelper.startPage(pageNo, pageSize); 
+        return BeanUtil.toPagedResult(materialBaseDao.findAllMaterialBaseInfo());
     }
     
 }

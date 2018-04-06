@@ -1,8 +1,7 @@
 package com.ssm.ming.service;
 
-import java.util.List;
-
-import com.ssm.ming.entity.MaterialBase;
+import com.ssm.ming.domain.MaterialBase;
+import com.ssm.ming.util.PagedResult;
 
 /**
  * @author Wenming.Huang
@@ -10,6 +9,6 @@ import com.ssm.ming.entity.MaterialBase;
  * @version 1.0
  */
 public interface MaterialBaseService {
-    List<MaterialBase> findAll();
+    PagedResult<MaterialBase> findAllMaterialBaseInfo(Integer pageNo,Integer pageSize);
 
 }

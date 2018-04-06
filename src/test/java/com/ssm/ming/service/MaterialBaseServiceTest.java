@@ -1,14 +1,15 @@
 package com.ssm.ming.service;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ssm.ming.entity.MaterialBase;
+import com.ssm.ming.domain.MaterialBase;
+import com.ssm.ming.util.PagedResult;
 
 /**
  * @author Wenming.Huang
@@ -18,12 +19,13 @@ import com.ssm.ming.entity.MaterialBase;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:applicationContext.xml" })
 public class MaterialBaseServiceTest {
+    Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
     @Autowired
-    public MaterialBaseService materialBaseService;
+    private MaterialBaseService materialBaseService;
     
     @Test
     public void findAllTest() {
-        List<MaterialBase> materialBases = materialBaseService.findAll();
-        System.out.println(materialBases.get(2).getMaterialNo());
+        PagedResult<MaterialBase> pagedResult = materialBaseService.findAllMaterialBaseInfo(1,10);
+        logger.debug("查找结果" + pagedResult); 
     }
 }

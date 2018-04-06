@@ -2,7 +2,7 @@ package com.ssm.ming.dao;
 
 import java.util.List;
 
-import com.ssm.ming.entity.MaterialBase;
+import com.ssm.ming.domain.MaterialBase;
 
 /**
  * @author Wenming.Huang
@@ -10,5 +10,5 @@ import com.ssm.ming.entity.MaterialBase;
  * @version 1.0
  */
 public interface MaterialBaseDao {
-    List<MaterialBase> findAll();
+    List<MaterialBase> findAllMaterialBaseInfo();
 }
