@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="libs/bootstrap/4.0.0/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<h1>物料信息管理</h1>
+		<div id="queryDiv">
+			<input id="textInput" type="text" placeholder="请输入料号">
+			<button id="queryButton" class="btn btn-primary" type="button">查询</button>
+		</div>
+		<form id="form1">
+			<table class="table table-bordered" id='tableResult'>
+				<caption>物料基础信息查询结果</caption>
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>用户名</th>
+						<th>密码</th>
+						<th>用户邮箱</th>
+					</tr>
+				</thead>
+				<tbody id="tableBody">
+				</tbody>
+			</table>
+			<!-- 底部分页按钮 -->
+			<div id="bottomTab"></div>
+		</form>
+
+	</body>
+
+</html>

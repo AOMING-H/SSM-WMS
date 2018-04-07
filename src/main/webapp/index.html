@@ -4,70 +4,122 @@
 	<head>
 		<meta charset="utf-8">
 		<title>WMS首页</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/model/index.css">
 		<script type="text/javascript" src="libs/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap.min.js"></script>
 		<script type="text/javascript" src="libs/model/common.js"></script>
+		<script type="text/javascript">
+			var showAtRight = function(menuUrl) {
+				$("#div-page").load(menuUrl);
+			};
+		</script>
 	</head>
 
 	<body>
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-			<h5 class="my-0 mr-md-auto font-weight-normal">仓库管理系统</h5>
-			<a class="btn btn-outline-primary" href="#">登录</a>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-2 column">
-					<nav class="navbar">
-						<!-- Links -->
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link" href="#">库存管理</a>
+		<div id="navBar">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="index.html">仓库管理系统</a>
+					<div>
+						<ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
+							<li class="nav-item dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="glyphicon glyphicon-user"></span>
+									<span>欢迎&nbsp;</span>
+									<span id="nav_userName">用户名</span>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li>
+										<a class="dropdown-item" href="#" id="signOut">
+											<span class="glyphicon glyphicon-off"></span>注销
+										</a>
+									</li>
+								</ul>
 							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="dropdown-divider"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div id="sideBar" class="col-md-2 bg-light">
+					<nav class="navbar navbar-light bg-light">
+						<ul class="navbar-nav">
 							<li class="nav-item">
 								<a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">仓库管理</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Link 1</a>
-									<a class="dropdown-item" href="#">Link 2</a>
-									<a class="dropdown-item" href="#">Link 3</a>
+									<a class="dropdown-item" href="#">物料入库</a>
+									<a class="dropdown-item" href="#">物料出库</a>
+									<a class="dropdown-item" href="#">库存查询</a>
+									<a class="dropdown-item" href="#">物料盘点</a>
+									<a class="dropdown-item" href="#">出入库记录</a>
 								</div>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">人员管理</a>
-							</li>
-							<!-- Dropdown -->
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-									基础数据
-								</a>
+								<a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">人员管理</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Link 1</a>
-									<a class="dropdown-item" href="#">Link 2</a>
-									<a class="dropdown-item" href="#">Link 3</a>
+									<a class="dropdown-item" href="#">仓库人员管理</a>
+								</div>
+
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">基础数据</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">仓库信息管理</a>
+									<a class="dropdown-item" href="#" onclick="showAtRight('materialInformationManagement.html')">物料信息管理</a>
+									<a class="dropdown-item" href="#">供应商信息管理</a>
 								</div>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">系统维护</a>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">系统维护</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">管理员密码更改</a>
+									<a class="dropdown-item" href="#">登录日志</a>
+									<a class="dropdown-item" href="#">系统设定</a>
+									<a class="dropdown-item" href="#">系统日志</a>
+								</div>
 							</li>
 						</ul>
 					</nav>
 					<br>
 				</div>
 
-				<div class="col-md-10 column">
-					<div class="card mb-4 box-shadow">
-						<div class="card-header">
-							<h4 class="my-0 font-weight-normal">Free</h4>
-						</div>
-						<div class="card-body">
-							<h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>10 users included</li>
-								<li>2 GB of storage</li>
-								<li>Email support</li>
-								<li>Help center access</li>
-							</ul>
-							<button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+				<div id="div-page" class="col-md-10">
+					<div class="card">
+						<div class="card-header">主页</div>
+						<div class="card-block row" style="margin-top: 100px; margin-bottom: 100px">
+							<div class="col-md-1"></div>
+							<div class="col-md-10 row">
+								<div class="col-md-4">
+									<a href="#">
+										<div class="card text-center">
+											<img class="card-img-top" src="./images/hold.jpg" alt="库存查询" style="width: 150px; height: 150px; margin: 0 auto; ">
+											<h3 class="card-title">库存查询</h3>
+										</div>
+									</a>
+								</div>
+								<div class="col-md-4">
+									<a href="#">
+										<div class="card text-center">
+											<img class="card-img-top" src="./images/hold.jpg" alt="物料入库" style="width: 150px; height: 150px; margin: 0 auto; ">
+											<h3 class="card-title">物料入库</h3>
+										</div>
+									</a>
+								</div>
+								<div class="col-md-4">
+									<a href="#">
+										<div class="card text-center">
+											<img class="card-img-top" src="./images/hold.jpg" alt="物料出库" style="width: 150px; height: 150px; margin: 0 auto; ">
+											<h3 class="card-title">物料出库</h3>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-1"></div>
 						</div>
 					</div>
 				</div>
