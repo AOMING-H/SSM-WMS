@@ -23,7 +23,19 @@
 				<button id="remove" type="button" class="fa fa-trash btn btn-danger"> 删除</button>
 				<button id="remove" type="button" class="fa fa-search-plus btn btn-primary"> 高级搜索</button>
 			</div>
-			<table id="table" data-toolbar="#toolbar" data-search="true" data-show-refresh="true" data-show-columns="true" data-minimum-count-columns="2" data-pagination="true" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" data-side-pagination="server" data-url="data/data.json" data-response-handler="responseHandler">
+			<table 
+				id="table" 
+				data-toolbar="#toolbar" 
+				data-search="true" 
+				data-show-refresh="true" 
+				data-show-columns="true" 
+				data-striped="true" 
+				data-minimum-count-columns="2" 
+				data-pagination="true" 
+				data-id-field="id" 
+				data-page-list="[10, 25, 50, 100, ALL]" 
+				data-side-pagination="server" 
+				data-response-handler="responseHandler">
 			</table>
 		</div>
 		
@@ -34,6 +46,14 @@
 
 			function initTable() {
 				$table.bootstrapTable({
+					url: url_base_materials,  //请求后台的URL（*）
+					method: 'get', //请求方式（*）
+					queryParams: queryParams, //传递参数（*）
+					queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
+					pageNumber: 1, //初始化加载第一页，默认第一页
+					pageSize: 10, //每页的记录行数（*）
+					contentType: "application/x-www-form-urlencoded",
+					clickToSelect: true, //是否启用点击选中行
 					columns: [{
 							field: 'state',
 							checkbox: true,
@@ -41,31 +61,86 @@
 							valign: 'middle'
 						},
 						{
-							title: 'Item ID',
 							field: 'id',
-							align: 'center',
-							sortable: true
+							title: 'ID',
+							sortable: true,
+							align: 'center'
 						},
 						{
-							field: 'name',
-							title: 'Item Name',
+							field: 'materialNo',
+							title: '料号',
 							sortable: true,
 							align: 'center'
 						}, {
-							field: 'price',
-							title: 'Item Price',
+							field: 'name',
+							title: '名称',
 							sortable: true,
 							align: 'center'
+						}, {
+							field: 'category',
+							title: '类别',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'unit',
+							title: '计量单位',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'storageLife',
+							title: '保存期(小时)',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'specifications',
+							title: '规格',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'description',
+							title: '描述',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'updateTime',
+							title: '更新时间',
+							sortable: true,
+							align: 'center',
+							formatter: function (value, row, index) {
+					            if (value == null) {
+					                return "";
+					            }
+					            var time = new Date(value).toLocaleDateString();
+					            return time;
+					        }
 						}
 					]
 				});
 			}
 
+			function queryParams(params) {
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					//limit: params.limit, //页面大小
+					//offset: params.offset
+					//pageNumber: 1,
+					//pageSize: 10
+					pageSize: params.limit,   //页面大小  
+				    pageNumber: params.offset,  //页码  
+				    sort: params.sort,  //排序列名  
+				    sortOrder: params.order//排位命令（desc，asc）  
+				};
+				return temp;
+			}
+			
 			function responseHandler(res) {
-				$.each(res.rows, function(i, row) {
+				var table = {
+                   	"total": res.data.total,	//总页数
+                    "rows": res.data.dataList   //数据
+                };
+				$.each(table.rows, function(i, row) {
 					row.state = $.inArray(row.id, selections) !== -1;
 				});
-				return res;
+				return table;
 			}
 
 			$(function() {
