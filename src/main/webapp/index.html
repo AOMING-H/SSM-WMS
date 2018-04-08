@@ -4,11 +4,18 @@
 	<head>
 		<meta charset="utf-8">
 		<title>WMS首页</title>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
 		<link rel="stylesheet" type="text/css" href="css/model/index.css">
+
 		<script type="text/javascript" src="libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="libs/popper/popper.min.js"></script>
 		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap.min.js"></script>
+		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap-table-zh-CN.min.js"></script>
 		<script type="text/javascript" src="libs/model/common.js"></script>
+		
 		<script type="text/javascript">
 			var showAtRight = function(menuUrl) {
 				$("#div-page").load(menuUrl);
@@ -17,75 +24,148 @@
 	</head>
 
 	<body>
-		<div id="navBar">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html">仓库管理系统</a>
-					<div>
-						<ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
-							<li class="nav-item dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="glyphicon glyphicon-user"></span>
-									<span>欢迎&nbsp;</span>
-									<span id="nav_userName">用户名</span>
-									<span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<li>
-										<a class="dropdown-item" href="#" id="signOut">
-											<span class="glyphicon glyphicon-off"></span>注销
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.html">仓库管理系统</a>
+				<div class="dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="fa fa-user">&nbsp;欢迎&nbsp;用户名:&nbsp;</span>
+						<span id="nav_userName">Admin</span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a id="signOut" class="dropdown-item" href="#">
+							<span class="fa fa-sign-out">&nbsp;注销</span>
+						</a>
 					</div>
 				</div>
-			</nav>
-		</div>
+			</div>
+		</nav>
 		<div class="dropdown-divider"></div>
+
 		<div class="container-fluid">
 			<div class="row">
-				<div id="sideBar" class="col-md-2 bg-light">
-					<nav class="navbar navbar-light bg-light">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">仓库管理</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">物料入库</a>
-									<a class="dropdown-item" href="#">物料出库</a>
-									<a class="dropdown-item" href="#">库存查询</a>
-									<a class="dropdown-item" href="#">物料盘点</a>
-									<a class="dropdown-item" href="#">出入库记录</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">人员管理</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">仓库人员管理</a>
-								</div>
-
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">基础数据</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">仓库信息管理</a>
-									<a class="dropdown-item" href="#" onclick="showAtRight('materialInformationManagement.html')">物料信息管理</a>
-									<a class="dropdown-item" href="#">供应商信息管理</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">系统维护</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">管理员密码更改</a>
-									<a class="dropdown-item" href="#">登录日志</a>
-									<a class="dropdown-item" href="#">系统设定</a>
-									<a class="dropdown-item" href="#">系统日志</a>
-								</div>
-							</li>
-						</ul>
-					</nav>
-					<br>
+				<div id="sidebar" class="col-md-2 bg-light">
+					<div class="card">
+						<div class="card-header">
+							<a href="#collapse1" data-toggle="collapse" data-parent="#accordion">
+								<h4 class="card-title">
+								    	仓库管理
+								    	<span class="fa fa-caret-down pull-right"></span>
+									</h4>
+							</a>
+						</div>
+						<div id="collapse1" class="collapse in card-block" role="tabpanel" aria-labelledby="仓库管理">
+							<ul class="list-group">
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										物料入库
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										物料出库
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										库存查询
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										物料盘点
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										出入库记录
+									</li>
+								</a>
+							</ul>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<a href="#collapse2" data-toggle="collapse" data-parent="#accordion">
+								<h4 class="card-title">
+								    	人员管理
+								    	<span class="fa fa-caret-down pull-right"></span>
+									</h4>
+							</a>
+						</div>
+						<div id="collapse2" class="collapse in card-block" role="tabpanel" aria-labelledby="人员管理">
+							<ul class="list-group">
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										仓库人员管理
+									</li>
+								</a>
+							</ul>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<a href="#collapse3" data-toggle="collapse" data-parent="#accordion">
+								<h4 class="card-title">
+								    	基础数据
+								    	<span class="fa fa-caret-down pull-right"></span>
+									</h4>
+							</a>
+						</div>
+						<div id="collapse3" class="collapse in card-block" role="tabpanel" aria-labelledby="基础数据">
+							<ul class="list-group">
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										仓库信息管理
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item" onclick="showAtRight('materialInformationManagement.html')">
+									<li class="list-group-item">
+										物料信息管理
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										供应商信息管理
+									</li>
+								</a>
+							</ul>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<a href="#collapse4" data-toggle="collapse" data-parent="#accordion">
+								<h4 class="card-title">
+								    	系统维护
+								    	<span class="fa fa-caret-down pull-right"></span>
+									</h4>
+							</a>
+						</div>
+						<div id="collapse4" class="collapse in card-block" role="tabpanel" aria-labelledby="系统维护">
+							<ul class="list-group">
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										管理员密码更改
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										登录日志
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										系统设定
+									</li>
+								</a>
+								<a href="#" class="sidebar_menu_item">
+									<li class="list-group-item">
+										系统日志
+									</li>
+								</a>
+							</ul>
+						</div>
+					</div>
 				</div>
 
 				<div id="div-page" class="col-md-10">

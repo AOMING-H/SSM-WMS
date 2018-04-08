@@ -1,36 +1,77 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
+	<!--<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<script src="libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="libs/bootstrap/4.0.0/bootstrap.min.js"></script>
-	</head>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css">
+
+		<script type="text/javascript" src="libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="libs/popper/popper.min.js"></script>
+		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap.min.js"></script>
+		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="libs/bootstrap/4.0.0/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="libs/model/common.js"></script>
+	</head>-->
 
 	<body>
-		<h1>物料信息管理</h1>
-		<div id="queryDiv">
-			<input id="textInput" type="text" placeholder="请输入料号">
-			<button id="queryButton" class="btn btn-primary" type="button">查询</button>
-		</div>
-		<form id="form1">
-			<table class="table table-bordered" id='tableResult'>
-				<caption>物料基础信息查询结果</caption>
-				<thead>
-					<tr>
-						<th>序号</th>
-						<th>用户名</th>
-						<th>密码</th>
-						<th>用户邮箱</th>
-					</tr>
-				</thead>
-				<tbody id="tableBody">
-				</tbody>
+		<div id="container" class="container">
+			<div id="toolbar" class="btn-group" role="group" aria-label="操作">
+				<button id="add" type="button" class="fa fa-plus btn btn-primary"> 新增</button>
+				<button id="edit" type="button" class="fa fa-edit btn btn-secondary"> 编辑</button>
+				<button id="remove" type="button" class="fa fa-trash btn btn-danger"> 删除</button>
+				<button id="remove" type="button" class="fa fa-search-plus btn btn-primary"> 高级搜索</button>
+			</div>
+			<table id="table" data-toolbar="#toolbar" data-search="true" data-show-refresh="true" data-show-columns="true" data-minimum-count-columns="2" data-pagination="true" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" data-side-pagination="server" data-url="data/data.json" data-response-handler="responseHandler">
 			</table>
-			<!-- 底部分页按钮 -->
-			<div id="bottomTab"></div>
-		</form>
+		</div>
+		
+		<script>
+			var $table = $('#table'),
+				$remove = $('#remove'),
+				selections = [];
+
+			function initTable() {
+				$table.bootstrapTable({
+					columns: [{
+							field: 'state',
+							checkbox: true,
+							align: 'center',
+							valign: 'middle'
+						},
+						{
+							title: 'Item ID',
+							field: 'id',
+							align: 'center',
+							sortable: true
+						},
+						{
+							field: 'name',
+							title: 'Item Name',
+							sortable: true,
+							align: 'center'
+						}, {
+							field: 'price',
+							title: 'Item Price',
+							sortable: true,
+							align: 'center'
+						}
+					]
+				});
+			}
+
+			function responseHandler(res) {
+				$.each(res.rows, function(i, row) {
+					row.state = $.inArray(row.id, selections) !== -1;
+				});
+				return res;
+			}
+
+			$(function() {
+				initTable();
+			});
+		</script>
 
 	</body>
 

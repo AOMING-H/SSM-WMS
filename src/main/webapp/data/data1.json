@@ -1,0 +1,60 @@
+{
+	"data": {
+		"dataList": [
+			{
+				"category": "RAW",
+				"createTime": 1521504000000,
+				"createUser": "1",
+				"description": "无描述",
+				"id": 1,
+				"isDelete": false,
+				"isEnable": true,
+				"materialNo": "11111111111",
+				"name": "物料A",
+				"specifications": "0805",
+				"storageLife": 8640,
+				"unit": "PCE",
+				"updateTime": 1521504000000,
+				"updateUser": "1"
+			}, {
+				"category": "RAW",
+				"createTime": 1521504000000,
+				"createUser": "1",
+				"description": "无描述",
+				"id": 2,
+				"isDelete": false,
+				"isEnable": true,
+				"materialNo": "11111111112",
+				"name": "物料B",
+				"specifications": "0805",
+				"storageLife": 8640,
+				"unit": "PCE",
+				"updateTime": 1521504000000,
+				"updateUser": "1"
+			}, {
+				"category": "WIP",
+				"createTime": 1521504000000,
+				"createUser": "1",
+				"description": "无描述",
+				"id": 3,
+				"isDelete": false,
+				"isEnable": true,
+				"materialNo": "21111111111",
+				"name": "物料C",
+				"specifications": "1111",
+				"storageLife": 8640,
+				"unit": "PCE",
+				"updateTime": 1521504000000,
+				"updateUser": "1"
+			}
+		],
+		"pageNo": 1,
+		"pageSize": 10,
+		"pages": 1,
+		"total": 3
+	},
+	"meta": {
+		"message": "ok",
+		"success": true
+	}
+}
