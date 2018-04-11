@@ -9,6 +9,7 @@ import com.ssm.ming.util.PagedResult;
  * @version 1.0
  */
 public interface MaterialBaseService {
-    PagedResult<MaterialBase> findAllMaterialBaseInfo(Integer pageNo,Integer pageSize);
+    PagedResult<MaterialBase> findMaterialBaseInfo(Integer pageNumber, Integer pageSize, String sort, String sortOrder,
+            String materialNo);
 
 }

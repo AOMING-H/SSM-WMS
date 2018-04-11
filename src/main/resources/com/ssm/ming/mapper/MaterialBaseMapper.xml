@@ -23,9 +23,11 @@
 	<sql id="Base_Column_List">
 		id, product_series_id, material_no, name, picture, category, unit, storage_life, specifications, description, is_enable, is_delete, create_time, create_user, update_time, update_user 
 	</sql>
-	<select id="findAllMaterialBaseInfo" resultMap="BaseResultMap" >
+	<select id="findMaterialBaseInfo" resultMap="BaseResultMap" parameterType="string">
 		select
 		<include refid="Base_Column_List" />
 		from t_material_base
+		where material_no like '%${materialNo}%'
+		order by ${sort} ${sortOrder}
 	</select>
 </mapper>

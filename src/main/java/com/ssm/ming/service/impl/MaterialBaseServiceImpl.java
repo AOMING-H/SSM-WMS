@@ -21,12 +21,13 @@ public class MaterialBaseServiceImpl implements MaterialBaseService{
     private MaterialBaseDao materialBaseDao;
 
     @Override
-    public PagedResult<MaterialBase>  findAllMaterialBaseInfo(Integer pageNo,Integer pageSize) {
-        pageNo = pageNo == null ? 1 : pageNo;
+    public PagedResult<MaterialBase> findMaterialBaseInfo(Integer pageNumber, Integer pageSize, String sort,
+            String sortOrder, String materialNo) {
+        pageNumber = pageNumber == null ? 1 : pageNumber;
         pageSize = pageSize == null ? 10 : pageSize;
         // startPage是告诉拦截器说我要开始分页了。分页参数是这两个
-        PageHelper.startPage(pageNo, pageSize); 
-        return BeanUtil.toPagedResult(materialBaseDao.findAllMaterialBaseInfo());
+        PageHelper.startPage(pageNumber, pageSize);
+        return BeanUtil.toPagedResult(materialBaseDao.findMaterialBaseInfo(sort, sortOrder, materialNo));
     }
     
 }

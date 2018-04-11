@@ -25,16 +25,29 @@ public class MaterialBaseControler {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private MaterialBaseService materialBaseService;
-    
+
     @RequestMapping(value = "materials", method = RequestMethod.GET)
-    public @ResponseBody Response findAllMaterialBaseInfo(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
-        logger.info("分页查询用户信息列表请求入参：pageNumber{}, pageSize{}", pageNumber,pageSize);
+    public @ResponseBody Response findAllMaterialBaseInfo(
+            @RequestParam(value = "pageNumber", required = true) Integer pageNumber,
+            @RequestParam(value = "pageSize", required = true) Integer pageSize, 
+            @RequestParam(value = "sort", required = false) String sort,
+            @RequestParam(value = "sortOrder", required = false) String sortOrder,
+            @RequestParam(value = "materialNo", required = false) String materialNo) {
+        logger.info("请求入参：pageNumber:{}, pageSize:{}, sort:{}, sortOrder:{}, materialNo:{}", pageNumber, pageSize, sort,
+                sortOrder, materialNo);
+
+        if(sort == null) {
+            sort = "id";
+        }
+        if(sortOrder == null) {
+            sortOrder = "asc";
+        }
         
         Response response = new Response();
-        PagedResult<MaterialBase> materialBases = materialBaseService.findAllMaterialBaseInfo(pageNumber, pageSize);
+        PagedResult<MaterialBase> materialBases = materialBaseService.findMaterialBaseInfo(pageNumber, pageSize,
+                sort, sortOrder, materialNo);
         response.success(materialBases);
         return response;
     };
-
     
 }

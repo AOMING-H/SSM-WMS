@@ -24,8 +24,8 @@ public class MaterialBaseServiceTest {
     private MaterialBaseService materialBaseService;
     
     @Test
-    public void findAllTest() {
-        PagedResult<MaterialBase> pagedResult = materialBaseService.findAllMaterialBaseInfo(1,10);
-        logger.debug("查找结果" + pagedResult); 
+    public void findMaterialBaseInfoTest() {
+        PagedResult<MaterialBase> pagedResult = materialBaseService.findMaterialBaseInfo(1,10,"id","asc","");
+        logger.info("查找结果" + pagedResult.getDataList()); 
     }
 }

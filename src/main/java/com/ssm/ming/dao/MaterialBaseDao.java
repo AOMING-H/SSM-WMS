@@ -2,6 +2,8 @@ package com.ssm.ming.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ssm.ming.domain.MaterialBase;
 
 /**
@@ -10,5 +12,6 @@ import com.ssm.ming.domain.MaterialBase;
  * @version 1.0
  */
 public interface MaterialBaseDao {
-    List<MaterialBase> findAllMaterialBaseInfo();
+    List<MaterialBase> findMaterialBaseInfo(@Param("sort") String sort, @Param("sortOrder") String sortOrder,
+            @Param("materialNo") String materialNo);
 }
