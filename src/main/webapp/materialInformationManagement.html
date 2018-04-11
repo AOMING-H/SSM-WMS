@@ -18,25 +18,88 @@
 	<body>
 		<div id="container" class="container">
 			<div id="toolbar" class="btn-group" role="group" aria-label="操作">
-				<button id="add" type="button" class="fa fa-plus btn btn-primary"> 新增</button>
-				<button id="edit" type="button" class="fa fa-edit btn btn-secondary"> 编辑</button>
+				<button id="add" type="button" class="fa fa-plus btn btn-primary" data-toggle="modal" data-target="#modal_add"> 新增</button>
+				<button id="edit" type="button" class="fa fa-edit btn btn-secondary"data-toggle="modal" data-target="#modal_edit"> 编辑</button>
 				<button id="remove" type="button" class="fa fa-trash btn btn-danger"> 删除</button>
-				<button id="remove" type="button" class="fa fa-search-plus btn btn-primary"> 高级搜索</button>
+				<button id="advanced_search" type="button" class="fa fa-search-plus btn btn-primary"data-toggle="modal" data-target="#modal_advanced_search"> 高级搜索</button>
 			</div>
 			<table 
-				id="table" 
-				data-toolbar="#toolbar" 
-				data-search="true" 
-				data-show-refresh="true" 
-				data-show-columns="true" 
+				id="table"
+				data-undefined-text="-" 
 				data-striped="true" 
-				data-minimum-count-columns="2" 
+				data-method="get" 
+				data-content-type="application/x-www-form-urlencoded" 
+				data-data-type="json" 
+				data-query-params="queryParams" 
+				data-query-params-type="un-limit" 
+				data-response-handler="responseHandler"
 				data-pagination="true" 
-				data-id-field="id" 
-				data-page-list="[10, 25, 50, 100, ALL]" 
 				data-side-pagination="server" 
-				data-response-handler="responseHandler">
+				data-page-number="1" 
+				data-page-size="10" 
+				data-page-list="[10, 25, 50, 100, ALL]" 
+				data-search="true" 
+				searchOnEnterKey="false" 
+				searchText="" 
+				data-show-columns="true" 
+				data-show-refresh="true" 
+				data-minimum-count-columns="2" 
+				data-id-field="id" 
+				data-click-to-select="true" 
+				data-toolbar="#toolbar" >
 			</table>
+			
+			<div class="modal fade" id="modal_add">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">新增物料信息</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							添加新的物料信息
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">提交</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="modal_edit">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">编辑物料信息</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							编辑物料信息
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">提交</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="modal_advanced_search">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">高级搜索</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							高级搜索
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">搜索</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<script>
@@ -47,13 +110,7 @@
 			function initTable() {
 				$table.bootstrapTable({
 					url: url_base_materials,  //请求后台的URL（*）
-					method: 'get', //请求方式（*）
-					queryParams: queryParams, //传递参数（*）
-					queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
-					pageNumber: 1, //初始化加载第一页，默认第一页
-					pageSize: 10, //每页的记录行数（*）
-					contentType: "application/x-www-form-urlencoded",
-					clickToSelect: true, //是否启用点击选中行
+					//url: "data/data1.json",  //请求后台的URL（*）
 					columns: [{
 							field: 'state',
 							checkbox: true,
@@ -119,15 +176,13 @@
 			}
 
 			function queryParams(params) {
-				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-					//limit: params.limit, //页面大小
-					//offset: params.offset
-					//pageNumber: 1,
-					//pageSize: 10
-					pageSize: params.limit,   //页面大小  
-				    pageNumber: params.offset,  //页码  
-				    sort: params.sort,  //排序列名  
-				    sortOrder: params.order//排位命令（desc，asc）  
+				console.log(params);
+				var temp = {
+					materialNo: params.searchText,
+					pageSize: params.pageSize,   	//页面大小  
+				    pageNumber: params.pageNumber,  //页码  
+				    sort: params.sort,  			//排序列名  
+				    sortOrder: params.sortOrder		//排位命令（desc，asc）  
 				};
 				return temp;
 			}
