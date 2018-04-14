@@ -153,4 +153,13 @@ public class MaterialBase {
         this.updateUser = updateUser;
     }
 
+    @Override
+    public String toString() {
+        return "MaterialBase [id=" + id + ", productSeriesId=" + productSeriesId + ", materialNo=" + materialNo
+                + ", name=" + name + ", picture=" + picture + ", category=" + category + ", unit=" + unit
+                + ", storageLife=" + storageLife + ", specifications=" + specifications + ", description=" + description
+                + ", isEnable=" + isEnable + ", isDelete=" + isDelete + ", createTime=" + createTime + ", createUser="
+                + createUser + ", updateTime=" + updateTime + ", updateUser=" + updateUser + "]";
+    }
+
 }

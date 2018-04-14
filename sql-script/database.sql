@@ -144,7 +144,7 @@ CREATE TABLE `t_material_base` (
 -- ----------------------------
 -- Records of t_sys_user_role
 -- ----------------------------
-INSERT INTO `t_material_base` VALUES ('1', null, '11111111111', '物料A', null, 'RAW', 'PCE', 8640, '0805', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
-INSERT INTO `t_material_base` VALUES ('2', null, '11111111112', '物料B', null, 'RAW', 'PCE', 8640, '0805', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
-INSERT INTO `t_material_base` VALUES ('3', null, '21111111111', '物料C', null, 'WIP', 'PCE', 8640, '1111', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
+INSERT INTO `t_material_base` VALUES ('1', null, '11111111111', '物料A', null, 'RM', 'PCE', 8640, '0805', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
+INSERT INTO `t_material_base` VALUES ('2', null, '11111111112', '物料B', null, 'RM', 'PCE', 8640, '0805', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
+INSERT INTO `t_material_base` VALUES ('3', null, '21111111111', '物料C', null, 'RM', 'PCE', 8640, '1111', '无描述', true, false, '2018-03-20 12:00:00', 1, '2018-03-20 12:00:00', 1);
 

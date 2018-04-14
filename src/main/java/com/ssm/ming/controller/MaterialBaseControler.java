@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,5 +50,15 @@ public class MaterialBaseControler {
         response.success(materialBases);
         return response;
     };
+    
+    @RequestMapping(value = "materials", method = RequestMethod.POST)
+    public @ResponseBody Response saveMaterialBaseInfo(@RequestBody MaterialBase materialBase) {
+        logger.info("请求入参：materialBase:{}", materialBase);
+
+        Response response = new Response();
+        response.success("");
+        return response;
+    };
+
     
 }
