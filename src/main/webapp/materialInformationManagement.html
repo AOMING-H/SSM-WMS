@@ -19,8 +19,8 @@
 		<div id="container" class="container">
 			<div id="toolbar" class="btn-group" role="group" aria-label="操作">
 				<button id="add" type="button" class="fa fa-plus btn btn-primary" onclick="showAddModal()"> 新增</button>
-				<button id="edit" type="button" class="fa fa-edit btn btn-secondary"data-toggle="modal" data-target="#modal_edit"> 编辑</button>
-				<button id="remove" type="button" class="fa fa-trash btn btn-danger"> 删除</button>
+				<button id="edit" type="button" class="fa fa-edit btn btn-secondary" onclick="showEditModal()"> 编辑</button>
+				<button id="remove" type="button" class="fa fa-trash btn btn-danger" onclick="showDeleteModal()"> 删除</button>
 				<button id="advanced_search" type="button" class="fa fa-search-plus btn btn-primary"data-toggle="modal" data-target="#modal_advanced_search"> 高级搜索</button>
 			</div>
 			<table 
@@ -53,10 +53,10 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">新增物料信息</h4>
+							<h4 id="edit_title" class="modal-title">新增物料信息</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-						<form id="form_edit" class="needs-validation" novalidate>
+						<form id="form_edit" novalidate>
 							<div class="modal-body">
 								<div class="mb-3">
 									<div class="input-group">
@@ -126,6 +126,26 @@
 				</div>
 			</div>
 			
+			<div class="modal fade" id="modal_delete">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">删除确认</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<form id="form_delete" novalidate>
+							<div class="modal-body">
+								<div id="delete_msg"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">确认</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
 			<div class="modal fade" id="modal_advanced_search">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -143,17 +163,32 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="modal fade" id="modal_hint">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="hint_title">提示</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div id="hint_msg"></div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<script>
-			var $table = $('#table'),
-				$remove = $('#remove'),
-				selections = [];
+			var $table = $('#table');
 
 			function initTable() {
 				$table.bootstrapTable({
-					url: url_base_materials,  //请求后台的URL（*）
-					//url: "data/data1.json",  //请求后台的URL（*）
+					//url: url_base_materials,  //请求后台的URL（*）
+					url: "data/data1.json",  //请求后台的URL（*）
 					columns: [{
 							field: 'state',
 							checkbox: true,
@@ -217,6 +252,11 @@
 					]
 				});
 			}
+			function getIdSelections() {
+        		return $.map($table.bootstrapTable('getSelections'), function (row) {
+            		return row.id
+        		});
+    		}
 
 			function queryParams(params) {
 				console.log(params);
@@ -235,13 +275,26 @@
                    	"total": res.data.total,	//总页数
                     "rows": res.data.dataList   //数据
                 };
-				$.each(table.rows, function(i, row) {
-					row.state = $.inArray(row.id, selections) !== -1;
-				});
+//				$.each(table.rows, function(i, row) {
+//					row.state = $.inArray(row.id, selections) !== -1;
+//				});
 				return table;
 			}
 			
+			function showHintModal(title, msg) {
+				$('#hint_title').empty().append(title);
+				$('#hint_msg').empty().append(msg);
+				$('#modal_hint').modal('toggle');
+			}
+			
 			function showAddModal() {
+				$('#edit_title').empty().append("新增物料信息");
+				$("input[name='materialNo']").val('');
+				$("input[name='name']").val('');
+				$("input[name='category']").val('');
+				$("input[name='unit']").val('');
+				$("input[name='description']").val('');
+				
 				$('#modal_edit').modal('toggle');
 				$('#form_edit').off('submit').on('submit', function () {
 					var dom_frm = document.getElementById('form_edit');
@@ -250,7 +303,7 @@
 		            	console.log("checkValidity false");
 			        } else {
 				        var dataPara = getFormJson(frm);
-				        console.log(dataPara);
+				        $('#modal_edit').modal('toggle');
 						$.ajax({
 							url: url_base_materials,
 							type: 'POST',
@@ -261,13 +314,99 @@
 								var data = JSON.parse(response).data;
 							},
 							error: function(response) {
-								alert(response);
+								showHintModal("请求出错了", response);
 							}
 						});
 			        }
 		            dom_frm.classList.add('was-validated');
 					return false;  
                 });
+			}
+			
+			function showEditModal() {
+				var ids = getIdSelections();
+				
+				if(ids.length != 1){
+	            	showHintModal("提示","请选择<b>单个</b>需要修改的项目");
+				} else {
+					var selection = $table.bootstrapTable('getSelections')[0];
+					
+					$('#edit_title').empty().append("修改物料信息");
+					$("input[name='materialNo']").val(selection.materialNo);
+					$("input[name='name']").val(selection.name);
+					$("select[name='category']").val(selection.category);
+					$("select[name='unit']").val(selection.unit);
+					$("input[name='description']").val(selection.description);
+					
+					$('#modal_edit').modal('toggle');
+					$('#form_edit').off('submit').on('submit', function () {
+						var dom_frm = document.getElementById('form_edit');
+						var frm = $('#form_edit');
+						if (dom_frm.checkValidity() === false) {
+			            	console.log("checkValidity false");
+				        } else {
+					        var dataPara = JSON.parse(getFormJson(frm));
+					        dataPara.id = selection.id;
+					        dataPara = JSON.stringify(dataPara);
+					        
+					        $('#modal_edit').modal('toggle');
+							$.ajax({
+								url: url_base_materials,
+								type: 'PUT',
+								contentType: "application/json; charset=utf-8",
+								data: dataPara,
+								success: function(response) {
+									var meta = JSON.parse(response).meta;
+									var data = JSON.parse(response).data;
+								},
+								error: function(response) {
+									showHintModal("请求出错了", response);
+								}
+							});
+				        }
+			            dom_frm.classList.add('was-validated');
+						return false;
+					});
+				}
+			}
+			
+			function showDeleteModal() {
+				var ids = getIdSelections();
+				if(ids.length === 0){
+	            	showHintModal("提示","请选择需要删除的元素");
+				} else {
+					var selections = $table.bootstrapTable('getSelections');
+					var msg = "<p>确认删除： <\p>";
+					$.each(selections, function(i, row) {
+						msg += "<p>料号：" + row.materialNo + "，名称 ：" + row.name + "<\p>";
+					});
+					$('#delete_msg').empty().append(msg);
+					
+					$('#modal_delete').modal('toggle');
+					$('#form_delete').off('submit').on('submit', function () {
+						var frm = $('#form_delete');
+					    $('#modal_delete').modal('toggle');
+						$.ajax({
+							url: url_base_materials,
+							type: 'DELETE',
+							contentType: "application/json; charset=utf-8",
+							data: JSON.stringify(ids),
+							success: function(response) {
+								var meta = JSON.parse(response).meta;
+								var data = JSON.parse(response).data;
+								$table.bootstrapTable('remove', {
+				                	field: 'id',
+				                	values: ids
+				            	});
+							},
+							error: function(response) {
+								console.log(response);
+								showHintModal("请求出错了", response.responseText);
+							}
+						});
+						return false;  
+	                });
+				}
 			}
 			
 			$(function() {

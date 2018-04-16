@@ -1,5 +1,6 @@
 package com.ssm.ming.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,21 @@ public class MaterialBaseControler {
         return response;
     };
 
+    @RequestMapping(value = "materials", method = RequestMethod.PUT)
+    public @ResponseBody Response editMaterialBaseInfo(@RequestBody MaterialBase materialBase) {
+        logger.info("请求入参：materialBase:{}", materialBase);
+
+        Response response = new Response();
+        response.success("");
+        return response;
+    };
     
+    @RequestMapping(value = "materials", method = RequestMethod.DELETE)
+    public @ResponseBody Response deleteMaterialBaseInfo(@RequestBody Integer[] ids) {
+        logger.info("请求入参：ids:{}", StringUtils.join(ids, ","));
+
+        Response response = new Response();
+        response.success("");
+        return response;
+    };
 }
