@@ -20,12 +20,50 @@ import com.ssm.ming.util.PagedResult;
 @ContextConfiguration({ "classpath:applicationContext.xml" })
 public class MaterialBaseServiceTest {
     Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
+    Integer id;
+    
+    
     @Autowired
     private MaterialBaseService materialBaseService;
     
     @Test
-    public void findMaterialBaseInfoTest() {
-        PagedResult<MaterialBase> pagedResult = materialBaseService.findMaterialBaseInfo(1,10,"id","asc","");
+    public void test001SaveMaterialBaseInfo() throws Exception {
+        MaterialBase materialBase = new MaterialBase();
+        String materialNo = (int)(Math.random()*1000000000) +"";
+        materialBase.setMaterialNo(materialNo);
+        materialBase.setName("TestMaterial");
+        materialBase.setCategory("RM");
+        materialBase.setUnit("PCE");
+        materialBase.setCreateUser("1");
+        materialBase.setUpdateUser("1");
+        Integer ret = materialBaseService.saveMaterialBaseInfo(materialBase);
+        id = materialBase.getId();
+        logger.info("保存结果 ret = " + ret + ", id = " + materialBase.getId()); 
+    }
+    
+    @Test
+    public void test002FindMaterialBaseInfo() throws Exception {
+        PagedResult<MaterialBase> pagedResult = materialBaseService.selectMaterialBaseInfo(1,10,"id","asc","");
         logger.info("查找结果" + pagedResult.getDataList()); 
+    }
+    
+    @Test
+    public void test003EditMaterialBaseInfo() throws Exception {
+        test001SaveMaterialBaseInfo();
+        
+        MaterialBase materialBase = new MaterialBase();
+        materialBase.setId(id);
+        materialBase.setName("TestMaterial123");
+        materialBase.setUpdateUser("1");
+        Integer ret = materialBaseService.editMaterialBaseInfo(materialBase);
+        logger.info("修改结果 ret = " + ret); 
+    }
+    
+    @Test
+    public void test004DeleteMaterialBaseInfo() throws Exception {
+        test001SaveMaterialBaseInfo();
+        Integer[] ids = {id};
+        Integer ret = materialBaseService.deleteMaterialBaseInfo(ids);
+        logger.info("删除结果 ret = " + ret); 
     }
 }

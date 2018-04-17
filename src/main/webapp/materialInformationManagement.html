@@ -187,8 +187,8 @@
 
 			function initTable() {
 				$table.bootstrapTable({
-					//url: url_base_materials,  //请求后台的URL（*）
-					url: "data/data1.json",  //请求后台的URL（*）
+					url: url_base_materials,  //请求后台的URL（*）
+					//url: "data/data1.json",  //请求后台的URL（*）
 					columns: [{
 							field: 'state',
 							checkbox: true,
@@ -312,6 +312,11 @@
 							success: function(response) {
 								var meta = JSON.parse(response).meta;
 								var data = JSON.parse(response).data;
+								if(meta.success == false){
+									showHintModal("请求出错了", meta.message);
+								} else {
+									$table.bootstrapTable('refresh');
+								}
 							},
 							error: function(response) {
 								showHintModal("请求出错了", response);
@@ -358,6 +363,11 @@
 								success: function(response) {
 									var meta = JSON.parse(response).meta;
 									var data = JSON.parse(response).data;
+									if(meta.success == false){
+										showHintModal("请求出错了", meta.message);
+									} else {
+										$table.bootstrapTable('refresh');
+									}
 								},
 								error: function(response) {
 									showHintModal("请求出错了", response);
@@ -394,10 +404,11 @@
 							success: function(response) {
 								var meta = JSON.parse(response).meta;
 								var data = JSON.parse(response).data;
-								$table.bootstrapTable('remove', {
-				                	field: 'id',
-				                	values: ids
-				            	});
+								if(meta.success == false){
+									showHintModal("请求出错了", meta.message);
+								} else {
+									$table.bootstrapTable('refresh');
+								}
 							},
 							error: function(response) {
 								console.log(response);

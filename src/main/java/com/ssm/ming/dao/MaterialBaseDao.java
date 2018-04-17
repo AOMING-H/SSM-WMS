@@ -12,6 +12,12 @@ import com.ssm.ming.domain.MaterialBase;
  * @version 1.0
  */
 public interface MaterialBaseDao {
-    List<MaterialBase> findMaterialBaseInfo(@Param("sort") String sort, @Param("sortOrder") String sortOrder,
-            @Param("materialNo") String materialNo);
+    List<MaterialBase> selectMaterialBaseInfo(@Param("sort") String sort, @Param("sortOrder") String sortOrder,
+            @Param("materialNo") String materialNo) throws Exception;
+    
+    Integer insertMaterialBaseInfo(MaterialBase materialBase) throws Exception;
+    
+    Integer updateMaterialBaseInfo(MaterialBase materialBase) throws Exception;
+    
+    Integer batchDeleteMaterialBaseInfo(Integer[] ids) throws Exception;
 }

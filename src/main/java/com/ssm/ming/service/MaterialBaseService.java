@@ -9,7 +9,12 @@ import com.ssm.ming.util.PagedResult;
  * @version 1.0
  */
 public interface MaterialBaseService {
-    PagedResult<MaterialBase> findMaterialBaseInfo(Integer pageNumber, Integer pageSize, String sort, String sortOrder,
-            String materialNo);
+    PagedResult<MaterialBase> selectMaterialBaseInfo(Integer pageNumber, Integer pageSize, String sort, String sortOrder,
+            String materialNo) throws Exception;
 
+    Integer saveMaterialBaseInfo(MaterialBase materialBase) throws Exception;
+    
+    Integer editMaterialBaseInfo(MaterialBase materialBase) throws Exception;
+    
+    Integer deleteMaterialBaseInfo(Integer[] ids) throws Exception;
 }

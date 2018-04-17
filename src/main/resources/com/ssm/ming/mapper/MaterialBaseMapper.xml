@@ -23,11 +23,67 @@
 	<sql id="Base_Column_List">
 		id, product_series_id, material_no, name, picture, category, unit, storage_life, specifications, description, is_enable, is_delete, create_time, create_user, update_time, update_user 
 	</sql>
-	<select id="findMaterialBaseInfo" resultMap="BaseResultMap" parameterType="string">
+	<select id="selectMaterialBaseInfo" resultMap="BaseResultMap" parameterType="string">
 		select
 		<include refid="Base_Column_List" />
 		from t_material_base
 		where material_no like '%${materialNo}%'
 		order by ${sort} ${sortOrder}
 	</select>
+
+	<insert id="insertMaterialBaseInfo" parameterType="com.ssm.ming.domain.MaterialBase" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into t_material_base (
+			<trim suffixOverrides=",">
+				material_no,
+				name,
+				category,
+				unit,
+				create_user,
+				update_user,
+				<if test="productSeriesId != null">product_series_id,</if>
+				<if test="picture != null">picture,</if>
+				<if test="storageLife != null">storage_life,</if>
+				<if test="specifications != null">specifications,</if>
+				<if test="description != null">description,</if>
+			</trim>
+		) values (
+			<trim suffixOverrides=",">
+				#{materialNo},
+				#{name},
+				#{category},
+				#{unit},
+				#{createUser},
+				#{updateUser},
+				<if test="productSeriesId != null">#{productSeriesId},</if>
+				<if test="picture != null">#{picture},</if>
+				<if test="storageLife != null">#{storageLife},</if>
+				<if test="specifications != null">#{specifications},</if>
+				<if test="description != null">#{description},</if>
+			</trim>
+		)
+	</insert>
+	
+	<update id="updateMaterialBaseInfo" parameterType="com.ssm.ming.domain.MaterialBase">
+		update t_material_base set
+			<trim suffixOverrides=",">
+				update_user=#{updateUser},
+				update_time=NOW(),
+				<if test="name != null">name=#{name},</if>
+				<if test="category != null">category=#{category},</if>
+				<if test="unit != null">unit=#{unit},</if>
+				<if test="productSeriesId != null">product_series_id=#{productSeriesId},</if>
+				<if test="picture != null">picture=#{picture},</if>
+				<if test="storageLife != null">storage_life=#{storageLife},</if>
+				<if test="specifications != null">specifications=#{specifications},</if>
+				<if test="description != null">description=#{description},</if>
+			</trim>
+		where id=#{id}
+	</update>
+	
+	<delete id="batchDeleteMaterialBaseInfo" parameterType="int">
+		delete from t_material_base where id in 
+			<foreach item="idItem" collection="array" open="(" separator="," close=")">
+	            #{idItem}
+	        </foreach>
+	</delete>
 </mapper>
