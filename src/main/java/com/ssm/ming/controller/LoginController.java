@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 import com.ssm.ming.service.UserService;
 import com.ssm.ming.util.Response;
 

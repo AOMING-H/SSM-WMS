@@ -1,6 +1,6 @@
 package com.ssm.ming.dao;
 
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 
 /**
  * @author Wenming.Huang

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssm.ming.dao.UserDao;
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 import com.ssm.ming.service.UserService;
 
 /**

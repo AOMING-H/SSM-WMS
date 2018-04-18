@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 import com.ssm.ming.service.UserService;
 import com.ssm.ming.util.Response;
 

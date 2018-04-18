@@ -16,9 +16,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ssm.ming.entity.Permission;
-import com.ssm.ming.entity.Role;
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.Permission;
+import com.ssm.ming.domain.Role;
+import com.ssm.ming.domain.User;
 import com.ssm.ming.service.UserService;
 import com.ssm.ming.service.impl.UserServiceImpl;
 

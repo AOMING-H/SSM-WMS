@@ -1,7 +1,5 @@
 package com.ssm.ming.controller;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssm.ming.domain.MaterialBase;
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 import com.ssm.ming.service.MaterialBaseService;
 import com.ssm.ming.util.PagedResult;
 import com.ssm.ming.util.Response;

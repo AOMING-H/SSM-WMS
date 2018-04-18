@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ssm.ming.entity.User;
+import com.ssm.ming.domain.User;
 
 /**
  * 配置spring和junit整合，junit启动时加载springIOC容器 spring-test,junit
