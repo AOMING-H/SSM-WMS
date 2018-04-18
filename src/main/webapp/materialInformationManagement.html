@@ -288,11 +288,13 @@
 			}
 			
 			function showAddModal() {
+				$("input[name='materialNo']").attr("disabled", false);
+				
 				$('#edit_title').empty().append("新增物料信息");
 				$("input[name='materialNo']").val('');
 				$("input[name='name']").val('');
-				$("input[name='category']").val('');
-				$("input[name='unit']").val('');
+				$("select[name='category']").val('');
+				$("select[name='unit']").val('');
 				$("input[name='description']").val('');
 				
 				$('#modal_edit').modal('toggle');
@@ -343,6 +345,7 @@
 					$("select[name='unit']").val(selection.unit);
 					$("input[name='description']").val(selection.description);
 					
+					$("input[name='materialNo']").attr("disabled", true);
 					$('#modal_edit').modal('toggle');
 					$('#form_edit').off('submit').on('submit', function () {
 						var dom_frm = document.getElementById('form_edit');

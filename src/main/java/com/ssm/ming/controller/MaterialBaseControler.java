@@ -8,6 +8,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +79,7 @@ public class MaterialBaseControler {
             Integer ret = materialBaseService.saveMaterialBaseInfo(materialBase);
             id = materialBase.getId();
             response.success(id);
-        } catch (SQLIntegrityConstraintViolationException e){
+        } catch (DuplicateKeyException e){
             e.printStackTrace();
             response.failure("料号已经存在");
         } catch (Exception e) {

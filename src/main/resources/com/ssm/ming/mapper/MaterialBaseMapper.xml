@@ -25,15 +25,37 @@
 	</sql>
 	<select id="selectMaterialBaseInfo" resultMap="BaseResultMap" parameterType="string">
 		select
-		<include refid="Base_Column_List" />
-		from t_material_base
-		where material_no like '%${materialNo}%'
-		order by ${sort} ${sortOrder}
+		    a.id,
+		    a.product_series_id,
+		    a.material_no,
+		    a.name,
+		    a.picture,
+		    a.category,
+		    a.unit,
+		    a.storage_life,
+		    a.specifications,
+		    a.description,
+		    a.is_enable,
+		    a.is_delete,
+		    a.create_time,
+		    b.user_name as create_user,
+		    a.update_time,
+		    c.user_name as update_user
+		from
+		    t_material_base AS a
+		        INNER JOIN
+		    t_sys_user AS b ON a.create_user = b.id
+		        INNER JOIN
+		    t_sys_user AS c ON a.update_user = c.id
+		where 
+			material_no like '%${materialNo}%'
+		order by 
+			${sort} ${sortOrder}
 	</select>
 
 	<insert id="insertMaterialBaseInfo" parameterType="com.ssm.ming.domain.MaterialBase" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		insert into t_material_base (
-			<trim suffixOverrides=",">
+		insert into t_material_base 
+			<trim prefix="(" suffix=")" suffixOverrides=",">
 				material_no,
 				name,
 				category,
@@ -46,8 +68,8 @@
 				<if test="specifications != null">specifications,</if>
 				<if test="description != null">description,</if>
 			</trim>
-		) values (
-			<trim suffixOverrides=",">
+		 values
+			<trim prefix="(" suffix=")" suffixOverrides=",">
 				#{materialNo},
 				#{name},
 				#{category},
@@ -60,7 +82,6 @@
 				<if test="specifications != null">#{specifications},</if>
 				<if test="description != null">#{description},</if>
 			</trim>
-		)
 	</insert>
 	
 	<update id="updateMaterialBaseInfo" parameterType="com.ssm.ming.domain.MaterialBase">
