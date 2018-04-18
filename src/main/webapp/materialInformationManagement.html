@@ -17,7 +17,12 @@
 
 	<body>
 		<div id="container" class="container">
-			<div id="toolbar" class="btn-group" role="group" aria-label="操作">
+		<ol class="breadcrumb" style="margin-bottom: 5px;">
+			<li class="breadcrumb-item">首页</li>
+			<li class="breadcrumb-item">基础数据</li>
+			<li class="breadcrumb-item active">物料信息管理</li>
+		</ol>
+		<div id="toolbar" class="btn-group" role="group" aria-label="操作">
 				<button id="add" type="button" class="fa fa-plus btn btn-primary" onclick="showAddModal()"> 新增</button>
 				<button id="edit" type="button" class="fa fa-edit btn btn-secondary" onclick="showEditModal()"> 编辑</button>
 				<button id="remove" type="button" class="fa fa-trash btn btn-danger" onclick="showDeleteModal()"> 删除</button>
