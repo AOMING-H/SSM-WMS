@@ -222,7 +222,7 @@ CREATE TABLE `t_vendor` (
   `name` varchar(40) NOT NULL COMMENT '名称',
   `code` varchar(40) NOT NULL COMMENT '代码',
   `contact` varchar(20) NOT NULL COMMENT '联系人',
-  `phoneNo` varchar(20) NOT NULL COMMENT '联系电话',
+  `phone_no` varchar(20) NOT NULL COMMENT '联系电话',
   `email` varchar(20) COMMENT '电子邮箱',
   `address` varchar(255) COMMENT '联系地址',
   `description` varchar(255) COMMENT '描述',
@@ -239,6 +239,6 @@ CREATE TABLE `t_vendor` (
 -- ----------------------------
 -- Records of t_vendor
 -- ----------------------------
-INSERT INTO `t_vendor` (id, name, code, contact, phoneNo, create_user, update_user) VALUES (1, '上海XXX', 'SHXXXX', '李小姐', '13851111111', 1, 1);
-INSERT INTO `t_vendor` (id, name, code, contact, phoneNo, create_user, update_user) VALUES (2, '北京XXX', 'BJXXXX', '王小姐', '13852222222', 1, 1);
-INSERT INTO `t_vendor` (id, name, code, contact, phoneNo, create_user, update_user) VALUES (3, '杭州XXX', 'HZXXXX', '赵先生', '13853333333', 1, 1);
+INSERT INTO `t_vendor` (id, name, code, contact, phone_no, create_user, update_user) VALUES (1, '上海XXX', 'SHXXXX', '李小姐', '13851111111', 1, 1);
+INSERT INTO `t_vendor` (id, name, code, contact, phone_no, create_user, update_user) VALUES (2, '北京XXX', 'BJXXXX', '王小姐', '13852222222', 1, 1);
+INSERT INTO `t_vendor` (id, name, code, contact, phone_no, create_user, update_user) VALUES (3, '杭州XXX', 'HZXXXX', '赵先生', '13853333333', 1, 1);
